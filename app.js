@@ -1,14 +1,21 @@
 var express = require('express');
 var path = require('path');
+var cors = require('cors');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var index = require('./routes/index');
 var users = require('./routes/users');
 var calculator = require('./routes/calculator');
 var app = express();
+
+app.use(cors());
+app.use(function(req, res, next) {
+	console.log("CORS disabled");
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
